@@ -187,6 +187,9 @@ def main():
         else:
             if not module.check_mode:
                 # doesn't exist. create it.
+                for container in module.params['containers']:
+                    container['cpu'] = int(container['cpu'])
+                    container['memory'] = int(container['memory'])
                 volumes = []
                 if 'volumes' in module.params:
                     volumes = module.params['volumes']
